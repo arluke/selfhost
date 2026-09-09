@@ -1,0 +1,20 @@
+zpool create \
+-o ashift=12 \
+-o autotrim=on \
+-O acltype=posixacl \
+-O atime=off \
+-O compression=zstd \
+-O dnodesize=auto \
+-O encryption=on -O keylocation=file:///etc/keyring.d/<key> -O keyformat=hex \
+-O mountpoint=/zmnt/<pool> \
+-O normalization=formD \
+-O recordsize=256K \
+-O relatime=on \
+-O xattr=sa \
+<pool> raidz2 \
+/dev/disk/by-id/<disk0> \
+...
+/dev/disk/by-id/<disk7> \
+log mirror \
+/dev/disk/by-id/<nvme0> \
+/dev/disk/by-id/<nvme1> \
