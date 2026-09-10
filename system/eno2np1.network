@@ -1,0 +1,7 @@
+[Match]
+Name=eno2np1
+
+[Network]
+DHCP=no
+LinkLocalAddressing=no
+KeepConfiguration=yes
