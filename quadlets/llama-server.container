@@ -1,0 +1,18 @@
+[Unit]
+Description=llama.cpp server container
+
+[Container]
+Image=ghcr.io/ggml-org/llama.cpp:server-cuda13
+ContainerName=llama-server
+User=3010
+Group=3010
+PublishPort=10.10.10.10:8080:8080
+Volume=/usr/share/models:/models:ro,z
+Exec=--models-preset /models/preset.ini --models-max 1 --parallel 2 --port 8080 --host 0.0.0.0
+AddDevice=nvidia.com/gpu=0
+
+[Service]
+Restart=on_failure
+
+[Install]
+WantedBy=default.target multi-user.target
