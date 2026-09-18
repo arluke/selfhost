@@ -1,0 +1,18 @@
+[Unit]
+Description=caddy reverse proxy server
+
+[Container]
+Image=docker.io/library/caddy:latest
+ContainerName=caddy
+User=3000
+Group=3000
+PublishPort=10.10.10.10:80:80,10.10.10.10:443:443
+Volume=/var/containerdata/caddy/data:/data:z
+Volume=/var/containerdata/caddy/config:/config:z
+Volume=/var/containerdata/caddy/Caddyfile:/etc/caddy/Caddyfile:ro,z
+
+[Service]
+Restart=on_failure
+
+[Install]
+WantedBy=default.target multi-user.target
